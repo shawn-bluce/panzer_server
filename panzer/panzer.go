@@ -7,7 +7,6 @@ const (
 	ready
 	alive
 	dead
-	star
 )
 
 const (
@@ -71,18 +70,14 @@ func NewPanzer(name, uuid string, maxHP, attack, moveSpeed, bulletSpeed, maxBull
 	}
 }
 
-func IsDead(panzer Panzer) bool {
+func IsDead(panzer *Panzer) bool {
 	return panzer.status == dead
 }
 
-func IsReady(panzer Panzer) bool {
+func IsReady(panzer *Panzer) bool {
 	return panzer.status == ready
 }
 
-func IsAlive(panzer Panzer) bool {
+func IsAlive(panzer *Panzer) bool {
 	return panzer.status == alive
-}
-
-func IsInvulnerable(panzer Panzer) bool {
-	return panzer.status == star
 }

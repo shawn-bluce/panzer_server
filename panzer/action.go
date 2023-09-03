@@ -1,14 +1,14 @@
 package panzer
 
-func UnderAttack(panzer Panzer, attack int) {
-	panzer.currentHP -= attack
-	if panzer.currentHP <= 0 {
-		panzer.status = dead
+func UnderAttack(pz *Panzer, attack int) {
+	pz.currentHP -= attack
+	if pz.currentHP <= 0 {
+		pz.status = dead
 	}
 }
 
-func Shot(panzer Panzer, xSpeed int, ySpeed int) {
-	if IsDead(panzer) {
+func Shot(pz *Panzer, xSpeed int, ySpeed int) {
+	if IsDead(pz) {
 		return
 	}
 }

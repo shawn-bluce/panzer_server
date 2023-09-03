@@ -15,7 +15,15 @@ func processRequest(from, jsonData string) []byte {
 		game.PanzerJoin(panzerObj)
 		log.Info("New Panzer Join", "name", panzerObj.Name, "panzer_list", game.GetPanzerListNames())
 		resp = []byte("this is join action")
+	} else {
+		// if not join, should have uuid
+		pz := game.GetPanzerWithUUID(requestData.UUID)
+		if pz == nil {
+			log.Warn("Not Found Panzer", "uuid", requestData.UUID)
+			return resp
+		}
 	}
+
 	if requestData.Action == "ready" {
 		resp = []byte("this is ready action")
 	}
