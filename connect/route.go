@@ -14,7 +14,7 @@ func processRequest(from, jsonData string) []byte {
 		panzerObj := panzer.NewPanzer(requestData.Name, requestData.UUID, 1, 1, 1, 1, 1, 1)
 		game.PanzerJoin(panzerObj)
 		log.Info("New Panzer Join", "name", panzerObj.Name, "panzer_list", game.GetPanzerListNames())
-		resp = []byte("this is join action")
+		resp = GenerateResponseData(panzerObj.UUID)
 	} else {
 		// if not join, should have uuid
 		pz := game.GetPanzerWithUUID(requestData.UUID)

@@ -1,0 +1,46 @@
+{
+  "uuid": "00000000-0000-0000-0000-000000000000",
+  "name": "Player 1",
+  "direction": "north",
+  "panzer": {
+    "maxHP": 100,
+    "attack": 20,
+    "moveSpeed": 20,
+    "bulletSpeed": 40,
+    "maxBulletCount": 10,
+    "shotInterval": 500,
+    "status": 0,
+    "direction": 0,
+    "currentHP": 100,
+    "currentBulletCount": 10,
+    "nextAllowShotTime": 0,
+    "x": 0,
+    "y": 0
+  },
+  "panzer_list": [
+    {
+      "name": "Player 2",
+      "maxHP": 100,
+      "status": 0,
+      "direction": 0,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "Player 3",
+      "maxHP": 100,
+      "status": 0,
+      "direction": 0,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "name": "Player 4",
+      "maxHP": 100,
+      "status": 0,
+      "direction": 0,
+      "x": 0,
+      "y": 0
+    }
+  ]
+}

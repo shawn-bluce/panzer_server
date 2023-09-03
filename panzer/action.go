@@ -1,9 +1,9 @@
 package panzer
 
 func UnderAttack(pz *Panzer, attack int) {
-	pz.currentHP -= attack
-	if pz.currentHP <= 0 {
-		pz.status = dead
+	pz.CurrentHP -= attack
+	if pz.CurrentHP <= 0 {
+		pz.Status = dead
 	}
 }
 

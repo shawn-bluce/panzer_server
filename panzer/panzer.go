@@ -22,22 +22,22 @@ type Panzer struct {
 	UUID string
 
 	// attributes
-	maxHP          int
-	attack         int
-	moveSpeed      int
-	bulletSpeed    int
-	maxBulletCount int
-	shotInterval   int // timestamp by microseconds
+	MaxHP          int
+	Attack         int
+	MoveSpeed      int
+	BulletSpeed    int
+	MaxBulletCount int
+	ShotInterval   int // timestamp by microseconds
 
 	// status
-	status             int
-	direction          int
-	currentHP          int
-	currentBulletCount int
-	nextAllowShotTime  int // timestamp by microseconds
+	Status             int
+	Direction          int
+	CurrentHP          int
+	CurrentBulletCount int
+	NextAllowShotTime  int // timestamp by microseconds
 
 	// position
-	x, y int
+	X, Y int
 }
 
 func NewPanzer(name, uuid string, maxHP, attack, moveSpeed, bulletSpeed, maxBulletCount, shotInterval int) *Panzer {
@@ -54,30 +54,30 @@ func NewPanzer(name, uuid string, maxHP, attack, moveSpeed, bulletSpeed, maxBull
 	return &Panzer{
 		Name:               name,
 		UUID:               uuid,
-		maxHP:              maxHP,
-		attack:             attack,
-		moveSpeed:          moveSpeed,
-		bulletSpeed:        bulletSpeed,
-		maxBulletCount:     maxBulletCount,
-		shotInterval:       shotInterval,
-		status:             wait,
-		direction:          north,
-		currentHP:          maxHP,
-		currentBulletCount: maxBulletCount,
-		nextAllowShotTime:  0,
-		x:                  0,
-		y:                  0,
+		MaxHP:              maxHP,
+		Attack:             attack,
+		MoveSpeed:          moveSpeed,
+		BulletSpeed:        bulletSpeed,
+		MaxBulletCount:     maxBulletCount,
+		ShotInterval:       shotInterval,
+		Status:             wait,
+		Direction:          north,
+		CurrentHP:          maxHP,
+		CurrentBulletCount: maxBulletCount,
+		NextAllowShotTime:  0,
+		X:                  0,
+		Y:                  0,
 	}
 }
 
 func IsDead(panzer *Panzer) bool {
-	return panzer.status == dead
+	return panzer.Status == dead
 }
 
 func IsReady(panzer *Panzer) bool {
-	return panzer.status == ready
+	return panzer.Status == ready
 }
 
 func IsAlive(panzer *Panzer) bool {
-	return panzer.status == alive
+	return panzer.Status == alive
 }

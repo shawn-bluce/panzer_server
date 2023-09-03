@@ -17,6 +17,16 @@ func GetPanzerListNames() string {
 	return resp
 }
 
+func GetPanzerListExcludedUUID(uuid string) []*panzer.Panzer {
+	resp := []*panzer.Panzer{}
+	for _, p := range panzerList {
+		if p.UUID != uuid {
+			resp = append(resp, p)
+		}
+	}
+	return resp
+}
+
 func GetPanzerWithUUID(uuid string) *panzer.Panzer {
 	for _, p := range panzerList {
 		if p.UUID == uuid {
