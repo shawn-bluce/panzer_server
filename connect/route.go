@@ -9,11 +9,13 @@ import (
 func processRequest(from, jsonData string) []byte {
 	requestData := GetReceivedData(jsonData)
 
-	resp := []byte("Invalid Action")
+	resp := []byte("{\"message\": \"Operation Failed\"}")
 	if requestData.Action == "join" {
 		panzerObj := panzer.NewPanzer(requestData.Name, requestData.UUID, 1, 1, 1, 1, 1, 1)
-		game.PanzerJoin(panzerObj)
-		log.Info("New Panzer Join", "name", panzerObj.Name, "panzer_list", game.GetPanzerListNames())
+		success := game.PanzerJoin(panzerObj)
+		if !success {
+			return []byte("{\"message\": \"panzer list is full\"}")
+		}
 		resp = GenerateResponseData(panzerObj.UUID)
 	} else {
 		// if not join, should have uuid
@@ -25,19 +27,19 @@ func processRequest(from, jsonData string) []byte {
 	}
 
 	if requestData.Action == "ready" {
-		resp = []byte("this is ready action")
+		resp = []byte("{}")
 	}
 	if requestData.Action == "shot" {
-		resp = []byte("this is shot action")
+		resp = []byte("{}")
 	}
 	if requestData.Action == "move" {
-		resp = []byte("this is move action")
+		resp = []byte("{}")
 	}
 	if requestData.Action == "turn" {
-		resp = []byte("this is turn action")
+		resp = []byte("{}")
 	}
 	if requestData.Action == "quit" {
-		resp = []byte("this is quit action")
+		resp = []byte("{}")
 	}
 	return resp
 }

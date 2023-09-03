@@ -14,31 +14,33 @@ type RequestData struct {
 }
 
 type selfPanzer struct {
-	maxHP              int
-	attack             int
-	moveSpeed          int
-	bulletSpeed        int
-	maxBulletCount     int
-	shotInterval       int
-	status             int
-	direction          int
-	currentHP          int
-	currentBulletCount int
-	nextAllowShotTime  int
-	x                  int
-	y                  int
+	MaxHP              int
+	Attack             int
+	MoveSpeed          int
+	BulletSpeed        int
+	MaxBulletCount     int
+	ShotInterval       int
+	Status             int
+	Direction          int
+	CurrentHP          int
+	CurrentBulletCount int
+	NextAllowShotTime  int
+	X                  int
+	Y                  int
 }
 
 type otherPanzer struct {
-	name      string
-	maxHP     int
-	status    int
-	direction int
-	x         int
-	y         int
+	Name      string
+	MaxHP     int
+	Status    int
+	Direction int
+	X         int
+	Y         int
 }
 
 type ResponseData struct {
+	OK         bool          `json:"ok"`
+	Message    string        `json:"message"`
 	UUID       string        `json:"uuid"`
 	Name       string        `json:"name"`
 	Direction  int           `json:"direction"`
@@ -56,32 +58,34 @@ func GenerateResponseData(playerUUID string) []byte {
 	selfPz := game.GetPanzerWithUUID(playerUUID)
 	otherPzList := game.GetPanzerListExcludedUUID(playerUUID)
 	subDataSelfPanzer := selfPanzer{
-		maxHP:              selfPz.MaxHP,
-		attack:             selfPz.Attack,
-		moveSpeed:          selfPz.MoveSpeed,
-		bulletSpeed:        selfPz.BulletSpeed,
-		maxBulletCount:     selfPz.MaxBulletCount,
-		shotInterval:       selfPz.ShotInterval,
-		status:             selfPz.Status,
-		direction:          selfPz.Direction,
-		currentHP:          selfPz.CurrentHP,
-		currentBulletCount: selfPz.CurrentBulletCount,
-		nextAllowShotTime:  selfPz.NextAllowShotTime,
-		x:                  selfPz.X,
-		y:                  selfPz.Y,
+		MaxHP:              selfPz.MaxHP,
+		Attack:             selfPz.Attack,
+		MoveSpeed:          selfPz.MoveSpeed,
+		BulletSpeed:        selfPz.BulletSpeed,
+		MaxBulletCount:     selfPz.MaxBulletCount,
+		ShotInterval:       selfPz.ShotInterval,
+		Status:             selfPz.Status,
+		Direction:          selfPz.Direction,
+		CurrentHP:          selfPz.CurrentHP,
+		CurrentBulletCount: selfPz.CurrentBulletCount,
+		NextAllowShotTime:  selfPz.NextAllowShotTime,
+		X:                  selfPz.X,
+		Y:                  selfPz.Y,
 	}
 	otherPzMiniInfoList := []otherPanzer{}
 	for _, p := range otherPzList {
 		otherPzMiniInfoList = append(otherPzMiniInfoList, otherPanzer{
-			name:      p.Name,
-			maxHP:     p.MaxHP,
-			status:    p.Status,
-			direction: p.Direction,
-			x:         p.X,
-			y:         p.Y,
+			Name:      p.Name,
+			MaxHP:     p.MaxHP,
+			Status:    p.Status,
+			Direction: p.Direction,
+			X:         p.X,
+			Y:         p.Y,
 		})
 	}
 	respData := &ResponseData{
+		OK:         true,
+		Message:    "OK",
 		UUID:       playerUUID,
 		Name:       selfPz.Name,
 		Direction:  selfPz.Direction,
