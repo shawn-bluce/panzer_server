@@ -3,23 +3,31 @@ package connect
 import (
 	"github.com/charmbracelet/log"
 	"net"
+	"panzer_server/utils"
 	"sync"
+)
+
+const (
+	bindAddress = "127.0.0.1:8080"
 )
 
 func handleClient(conn net.Conn) {
 	defer conn.Close()
-	log.Info("Start handle connection", "conn", conn)
+	remoteAddr := conn.RemoteAddr().String()
 	for {
 		tcpContent := make([]byte, 1024)
-		log.Debug("Waiting for message", "conn", conn)
 		_, err2 := conn.Read(tcpContent)
+		tcpContentString := utils.RStripBinaryZeros(tcpContent)
 		if err2 != nil {
-			log.Error("Failed to read message, closing connection", "conn", conn)
+			log.Error("Failed to read message, closing:", "connection", remoteAddr)
 			conn.Close()
 			return
 		}
-		log.Debug("Sending message", "conn", conn)
-		_, err := conn.Write([]byte("Hello World! from server"))
+
+		responseData := processRequest(remoteAddr, tcpContentString)
+
+		log.Debug("Get", "message", tcpContentString)
+		_, err := conn.Write(responseData)
 		if err != nil {
 			log.Error("Failed to send message, closing connection", "conn", conn)
 			conn.Close()
@@ -30,11 +38,11 @@ func handleClient(conn net.Conn) {
 
 func Listen() {
 
-	log.Info("Try to listen on port 127.0.0.1:8080")
-	ln, err := net.Listen("tcp", "127.0.0.1:8080")
-	log.Info("TCP socket listening on port 127.0.0.1:8080")
+	log.Info("Try to listen on ", "address", bindAddress)
+	ln, err := net.Listen("tcp", bindAddress)
+	log.Info("Successfully to listening")
 	if err != nil {
-		log.Error("Failed to listen on port 127.0.0.1:8080")
+		log.Error("Failed to listening")
 		panic(err)
 	}
 

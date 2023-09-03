@@ -1,7 +1,9 @@
 package panzer
 
 type Bullet struct {
-	from   string
-	attack int
-	speed  int
+	fromUUID               string
+	attack                 int
+	speed                  int
+	x, y                   int
+	directionX, directionY int
 }

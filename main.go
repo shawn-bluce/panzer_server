@@ -8,8 +8,7 @@ import (
 func main() {
 	log.SetLevel(log.DebugLevel)
 
-	log.Debug("Cookie 🍪")
-	log.Info("Hello World!")
+	log.Info("Panzer Server is starting...")
 
 	connect.Listen()
 }

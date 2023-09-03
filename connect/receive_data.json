@@ -2,5 +2,6 @@
   "action": "join",
   "uuid": "00000000-0000-0000-0000-000000000000",
   "name": "Player 1",
-  "direction": 0
+  "direction": "north",
+  "move": 1
 }
